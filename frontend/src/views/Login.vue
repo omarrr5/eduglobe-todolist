@@ -6,8 +6,13 @@
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6" @submit="login">
-        <div v-if="errorMessage" class="py-3 px-5 bg-red-500 text-white rounded">
+        <div v-if="errorMessage" class="flex items-center justify-between py-3 px-5 bg-red-500 text-white rounded">
         {{errorMessage}}
+        <span @click="errorMessage = ''" class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+        </span>
         </div>
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
