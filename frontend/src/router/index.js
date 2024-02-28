@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from '../views/Dashboard';
-import List from '../views/List'
 import Login from '../views/Login';
 import Register from '../views/Register';
 import DeafultLayout from '../components/DeafultLayout';
@@ -39,11 +38,6 @@ const routes = [
                 name: 'Dashboard',
                 component: Dashboard
             },
-            {
-                path: '/list',
-                name: 'List',
-                component: List
-            }
         ]
     }
 ];

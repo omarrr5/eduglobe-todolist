@@ -184,7 +184,6 @@ import { useRouter } from "vue-router";
 
 const navigation = [
   { name: "Dashboard", to: {name: 'Dashboard'}},
-  { name: "Create New List", to: {name: 'List'}},
 ];
 
 const userNavigation = [
@@ -217,9 +216,6 @@ export default {
         });
       });
       }
-
-    // store.dispatch("getUser");
-
     return {
       user: computed(() => store.state.user.data),
       navigation,
