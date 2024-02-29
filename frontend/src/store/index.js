@@ -32,7 +32,29 @@ const store = createStore({
                 commit('logout')
                 return response;
               })
-          }
+          },
+          fetchTodos({ commit }) {
+            return axiosClient.get('/todos')
+                .then(response => {
+                    commit('setTodos', response.data); 
+                    return response.data;
+                })
+                .catch(error => {
+                    console.error('Error fetching todos:', error);
+                    throw error;
+                });
+        },
+        deleteTodo({ commit }, todoId) {
+          return axiosClient.delete(`/todos/${todoId}`)
+              .then(response => {
+                  commit('removeTodo', todoId); 
+                  return response.data;
+              })
+              .catch(error => {
+                  console.error('Error deleting todo:', error);
+                  throw error;
+              });
+      },
     },
     mutations:{
         logout: (state) => {
@@ -47,7 +69,13 @@ const store = createStore({
             state.user.token = token;
             sessionStorage.setItem('TOKEN', token);
           },
-      
+          setTodos(state, todos) {
+            state.todos = todos;
+        },
+        removeTodo(state, todoId) {
+          state.todos = state.todos.filter(todo => todo.id !== todoId); 
+      },
+
     },
     modules:{},
 });

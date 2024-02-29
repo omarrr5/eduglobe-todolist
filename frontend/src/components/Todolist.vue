@@ -20,7 +20,7 @@
           </td>
           <td>
             <button @click="openEditModal(todo)" class="edit-button">Edit</button>
-            <button @click="deleteTodo(todo.id)" class="delete-button">Delete</button>
+            <button @click="deleteTodoHandler(todo.id)" class="delete-button">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -59,11 +59,13 @@
 <script>
 export default {
   name: 'Todolist',
-  props: {
-    todos: {
-      type: Array,
-      default: () => []
+  computed: {
+    todos() {
+      return this.$store.state.todos; 
     }
+  },
+  created() {
+    this.$store.dispatch('fetchTodos'); 
   },
     data() {
     return {
@@ -72,8 +74,15 @@ export default {
     };
   },
   methods: {
-    deleteTodo(todoId) {
-      this.$emit('delete-todo', todoId);
+    deleteTodoHandler(todoId) {
+      this.$store.dispatch('deleteTodo', todoId)
+        .then(() => {
+          console.log('Todo deleted successfully');
+        })
+        .catch(error => {
+          // Handle error
+          console.error('Error deleting todo:', error);
+        });
     },
     openEditModal(todo) {
       this.editedTask = { ...todo }; 

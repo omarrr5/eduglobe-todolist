@@ -28,10 +28,11 @@ class TodosController extends Controller
             'completed' => 'required|boolean'
         ]);
         $todo->update($data);
-        return response($todo, 201);
+        return response($todo, 200);
     }
 
     public function destroy(Todo $todo){
-
+        $todo->delete();
+        return response('Deleted todo item', 200);
     }
 }
