@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->string('task')->nullable();
-            $table->boolean('is_completed')->default(false);
-            $table->timestamp('completed_at')->nullable;
+            $table->increments('id');
+            $table->string('title')->nullable();
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }
