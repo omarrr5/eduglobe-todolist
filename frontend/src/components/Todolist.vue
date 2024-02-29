@@ -70,7 +70,7 @@ export default {
     data() {
     return {
       editModal: false,
-      editedTask: {}
+      editedTask: { id: null, title: '', completed: false }, 
     };
   },
   methods: {
@@ -80,7 +80,6 @@ export default {
           console.log('Todo deleted successfully');
         })
         .catch(error => {
-          // Handle error
           console.error('Error deleting todo:', error);
         });
     },
@@ -92,8 +91,14 @@ export default {
       this.editModal = false;
     },
     updateTask() {
-      this.$emit('update-task', this.editedTask);
-      this.closeEditModal();
+      this.$store.dispatch('updateTodo', this.editedTask) 
+        .then(() => {
+          console.log('Todo updated successfully');
+          this.closeEditModal(); 
+        })
+        .catch(error => {
+          console.error('Error updating todo:', error);
+        });
     },
     updateTaskStatus() {
       this.$emit('update-task', this.editedTask);
