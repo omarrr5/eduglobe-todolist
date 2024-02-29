@@ -28,7 +28,7 @@
         </div>
       </div>
       <div>
-      <Todolist :todos="tasks" @delete-todo="deleteTask"/>
+      <Todolist :todos="tasks" @delete-todo="deleteTask" @update-task="updateTask"/>
       </div>
     </main>
   </div>
@@ -63,9 +63,15 @@ export default {
       this.tasks.push({ id: this.tasks.length + 1, title: this.taskName, completed: false });
       this.closeModal();
     },
-        deleteTask(todoId) {
+    deleteTask(todoId) {
       this.tasks = this.tasks.filter(todo => todo.id !== todoId);
     },
+    updateTask(updatedTask){
+      const index = this.tasks.findIndex(task => task.id === updatedTask.id);
+      if(index !== -1){
+        this.tasks[index] = { ...updatedTask };
+      }
+    }
   }
 };
 </script>
