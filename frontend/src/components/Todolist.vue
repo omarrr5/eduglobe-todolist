@@ -6,7 +6,7 @@
           <th>ID</th>
           <th>Title</th>
           <th>Status</th>
-          <th>Actions</th> 
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +25,7 @@
         </tr>
       </tbody>
     </table>
+    
     <div class="modal" v-show="editModal">
       <div class="modal-content">
         <span class="close" @click="closeEditModal">&times;</span>
@@ -33,6 +34,12 @@
           <div class="flex flex-col mb-4">
             <label for="editTaskName" class="text-sm font-medium">Task Name</label>
             <input type="text" id="editTaskName" v-model="editedTask.title" placeholder="Enter task name" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500">
+          </div>
+          <div class="flex flex-col mb-4">
+            <label for="editTaskStatus" class="text-sm font-medium">Task Status</label>
+            <select id="editTaskStatus" v-model="editedTask.completed" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500">
+            <option :value="!editedTask.completed">{{ editedTask.completed ? 'Pending' : 'Completed' }}</option>
+            </select>
           </div>
           <div class="flex justify-end">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
@@ -47,6 +54,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -75,6 +83,10 @@ export default {
       this.editModal = false;
     },
     updateTask() {
+      this.$emit('update-task', this.editedTask);
+      this.closeEditModal();
+    },
+    updateTaskStatus() {
       this.$emit('update-task', this.editedTask);
       this.closeEditModal();
     }
