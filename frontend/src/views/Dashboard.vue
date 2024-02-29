@@ -27,17 +27,27 @@
           </form>
         </div>
       </div>
+      <div>
+      <Todolist :todos="tasks" @delete-todo="deleteTask"/>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
+import Todolist from '../components/Todolist.vue';
+
+
 export default {
   name: "Dashboard",
+  components: {
+    Todolist,
+  },
   data() {
     return {
       showModal: false,
-      taskName: ''
+      taskName: '',
+      tasks: [] 
     };
   },
   methods: {
@@ -50,14 +60,17 @@ export default {
     },
     addTask() {
       console.log('Task Name:', this.taskName);
+      this.tasks.push({ id: this.tasks.length + 1, title: this.taskName, completed: false });
       this.closeModal();
-    }
+    },
+        deleteTask(todoId) {
+      this.tasks = this.tasks.filter(todo => todo.id !== todoId);
+    },
   }
 };
 </script>
 
 <style>
-/* Modal Styles */
 .modal {
   position: fixed;
   z-index: 1;
@@ -69,7 +82,6 @@ export default {
   background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content */
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
@@ -78,7 +90,6 @@ export default {
   width: 80%;
 }
 
-/* Close Button */
 .close {
   color: #aaa;
   float: right;
