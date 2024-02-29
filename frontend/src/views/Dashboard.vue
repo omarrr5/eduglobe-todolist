@@ -14,7 +14,7 @@
           <form @submit.prevent="addTask">
             <div class="flex flex-col mb-4">
               <label for="taskName" class="text-sm font-medium">Task Name</label>
-              <input type="text" id="taskName" v-model="taskName" placeholder="Enter task name" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500">
+              <input type="text" id="taskName" v-model="taskName" placeholder="Enter task name" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500" required>
             </div>
             <div class="flex justify-end">
               <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
