@@ -31,6 +31,21 @@ class TodosController extends Controller
         return response()->json(['message' => 'Task created successfully', 'task' => $task], 201);
     }
 
+    public function storeItem(Request $request, Todo $todo)
+    {
+        $request->validate([
+            'title' => 'required|string',
+        ]);
+
+        $item = new Item([
+            'title' => $request->input('title'),
+        ]);
+
+        $todo->items()->save($item);
+
+        return response()->json(['message' => 'Item created successfully', 'item' => $item], 201);
+    }
+
     public function update(Request $request, Todo $todo){
         $data = $request->validate([
             'title' => 'required|string',

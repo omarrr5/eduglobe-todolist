@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from '../views/Dashboard';
+import TaskDetail from '../views/TaskDetail';
 import Login from '../views/Login';
 import Register from '../views/Register';
 import DeafultLayout from '../components/DeafultLayout';
@@ -37,6 +38,12 @@ const routes = [
                 path: '/dashboard',
                 name: 'Dashboard',
                 component: Dashboard
+            },
+            {
+                path: '/task/:title', 
+                name: 'TaskDetail',
+                component: TaskDetail,
+                props: true 
             },
         ]
     }

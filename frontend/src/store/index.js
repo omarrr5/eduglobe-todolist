@@ -106,6 +106,19 @@ const store = createStore({
           throw error;
         });
     },
+
+    addTodoItem({ commit }, { todoId, item }) {
+      return axiosClient.post(`/todos/${todoId}/items`, item)
+        .then(response => {
+          const newItem = response.data;
+          commit('addTodoItem', newItem);
+          return newItem;
+        })
+        .catch(error => {
+          console.error('Error adding todo item:', error);
+          throw error;
+        });
+    },
   },
   mutations:{
     logout: (state) => {
@@ -140,6 +153,12 @@ const store = createStore({
     },
     removeTodo(state, todoId) {
       state.todos = state.todos.filter(todo => todo.id !== todoId); 
+    },
+    addTodoItem(state, newItem) {
+      const todoIndex = state.todos.findIndex(todo => todo.id === newItem.todo_id);
+      if (todoIndex !== -1) {
+        state.todos[todoIndex].items.push(newItem);
+      }
     },
   },
   modules:{},

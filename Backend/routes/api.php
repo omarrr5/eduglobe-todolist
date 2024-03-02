@@ -34,3 +34,5 @@ Route::get('/user/{id}/todos', [TodosController::class, 'index']);
 Route::post('/user/{id}/todos', [TodosController::class, 'store']);
 Route::patch('/todos/{todo}', [TodosController::class, 'update']);
 Route::delete('/todos/{todo}', [TodosController::class, 'destroy']);
+
+Route::post('/todos/{todo}/items', [TodosController::class, 'storeItem']);

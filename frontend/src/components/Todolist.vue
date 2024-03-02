@@ -12,7 +12,9 @@
       <tbody>
         <tr v-for="todo in todos" :key="todo.id">
           <td>{{ todo.id }}</td>
-          <td>{{ todo.title }}</td>
+          <td>
+          <router-link :to="{ name: 'TaskDetail', params: { title: todo.title, todoId: todo.id } }">{{ todo.title }}</router-link>
+          </td>
           <td>
             <span :class="{ 'completed': todo.completed, 'pending': !todo.completed }">
               {{ todo.completed ? 'Completed' : 'Pending' }}
