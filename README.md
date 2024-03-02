@@ -1,77 +1,45 @@
-Todo List Application
-This is a Todo List application built with Laravel (backend) and Vue.js (frontend).
+# Project Name
 
-Installation
-Prerequisites
-PHP (>= 7.4)
-Composer
-Node.js (>= 14.x)
-NPM or Yarn
-Backend Setup
-Clone the repository:
+## Description
+Brief description of the project.
 
-bash
-Copy code
-git clone https://github.com/your-username/todo-list.git
-Navigate to the backend directory:
+## Installation
 
-bash
-Copy code
-cd todo-list/backend
-Install PHP dependencies:
+### Backend (Laravel)
 
-bash
-Copy code
-composer install
-Copy the .env.example file and rename it to .env:
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd <project-directory>/backend`
+3. Install dependencies: `composer install`
+4. Create a copy of the `.env.example` file and rename it to `.env`
+5. Generate application key: `php artisan key:generate`
+6. Set up your database connection in the `.env` file
+7. Run migrations: `php artisan migrate`
+8. Start the development server: `php artisan serve`
 
-bash
-Copy code
-cp .env.example .env
-Generate the application key:
+### Frontend (Vue.js)
 
-bash
-Copy code
-php artisan key:generate
-Update the database settings in the .env file with your database credentials.
+1. Navigate to the project directory: `cd <project-directory>/frontend`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run serve`
 
-Run the database migrations to create the necessary tables:
+## Usage
 
-bash
-Copy code
-php artisan migrate
-Start the Laravel development server:
+### Backend (Laravel)
 
-bash
-Copy code
-php artisan serve
-The backend server will start running at http://localhost:8000.
+- Access the API endpoints at: `http://localhost:8000/api/`
 
-Frontend Setup
-Navigate to the frontend directory:
+### Frontend (Vue.js)
 
-bash
-Copy code
-cd ../frontend
-Install JavaScript dependencies:
+- Access the Vue.js application at: `http://localhost:8080/`
 
-bash
-Copy code
-npm install
-# or
-yarn install
-Start the Vue.js development server:
+## Contributing
 
-bash
-Copy code
-npm run serve
-# or
-yarn serve
-The frontend development server will start running at http://localhost:8080.
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
 
-Visit http://localhost:8080 in your browser to view the application.
+## License
 
-Usage
-You can now use the Todo List application by accessing it through your web browser. Create, update, delete tasks as needed.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE).
