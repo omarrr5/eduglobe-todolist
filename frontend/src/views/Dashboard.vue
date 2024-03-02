@@ -37,7 +37,6 @@
 <script>
 import Todolist from '../components/Todolist.vue';
 
-
 export default {
   name: "Dashboard",
   components: {
@@ -58,11 +57,21 @@ export default {
       this.showModal = false;
       this.taskName = '';
     },
-    addTask() {
-      console.log('Task Name:', this.taskName);
-      this.tasks.push({ id: this.tasks.length + 1, title: this.taskName, completed: false });
-      this.closeModal();
-    },
+  addTask() {
+    const todo = {
+      title: this.taskName,
+      completed: false 
+    };
+    this.$store.dispatch('addTodo', todo)
+      .then((data) => {
+        this.tasks.push(data);
+        this.taskName = '';
+        this.closeModal();
+      })
+      .catch(error => {
+        console.error('Error adding todo:', error);
+      });
+  },
     deleteTask(todoId) {
       this.tasks = this.tasks.filter(todo => todo.id !== todoId);
     },

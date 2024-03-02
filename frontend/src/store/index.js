@@ -6,7 +6,8 @@ const store = createStore({
         user: {
             data: {},
             token: sessionStorage.getItem("TOKEN"),
-        }
+        },
+        todos: [],
     },
     getters:{},
     actions: {
@@ -44,6 +45,17 @@ const store = createStore({
                     throw error;
                 });
         },
+        addTodo({ commit }, todo) {
+          return axiosClient.post('/todos', todo)
+              .then(response => {
+                  commit('addTodo', response.data); 
+                  return response.data;
+              })
+              .catch(error => {
+                  console.error('Error adding todo:', error);
+                  throw error;
+              });
+      },
         updateTodo({ commit }, todo) {
           return axiosClient.patch(`/todos/${todo.id}`, todo)
               .then(response => {
@@ -82,8 +94,11 @@ const store = createStore({
           },
           setTodos(state, todos) {
             state.todos = todos;
-        },
-        updateTodo(state, updatedTodo) {
+          },
+          addTodo(state, newTodo) {
+            state.todos.push(newTodo);
+          },
+          updateTodo(state, updatedTodo) {
           state.todos = state.todos.map(todo => {
               if (todo.id === updatedTodo.id) {
                   return updatedTodo;

@@ -96,7 +96,7 @@ export default {
           console.log('Todo updated successfully');
           this.closeEditModal(); 
         })
-        .catch(error => {
+        .catch(error => { 
           console.error('Error updating todo:', error);
         });
     },
