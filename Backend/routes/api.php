@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\TodosController;
+use App\Http\Controllers\TodosController; 
+use App\Models\User;
+
 
 
 /*
@@ -28,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/todos', [TodosController::class, 'index']);
-Route::post('/todos', [TodosController::class, 'store']);
+Route::get('/user/{id}/todos', [TodosController::class, 'index']); 
+Route::post('/user/{id}/todos', [TodosController::class, 'store']);
 Route::patch('/todos/{todo}', [TodosController::class, 'update']);
 Route::delete('/todos/{todo}', [TodosController::class, 'destroy']);

@@ -64,8 +64,9 @@ export default {
       return this.$store.state.todos; 
     }
   },
-  created() {
-    this.$store.dispatch('fetchTodos'); 
+   created() {
+    const userId = this.$store.state.user.data.id; 
+    this.$store.dispatch('fetchUserTodos', userId); 
   },
     data() {
     return {

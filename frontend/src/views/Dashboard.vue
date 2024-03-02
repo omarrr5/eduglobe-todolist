@@ -10,11 +10,11 @@
       <div class="modal" v-show="showModal">
         <div class="modal-content">
           <span class="close" @click="closeModal">&times;</span>
-          <h2 class="text-xl font-semibold mb-4">Enter Task Name</h2>
+          <h2 class="text-xl font-semibold mb-4">Enter Task Details</h2>
           <form @submit.prevent="addTask">
             <div class="flex flex-col mb-4">
-              <label for="taskName" class="text-sm font-medium">Task Name</label>
-              <input type="text" id="taskName" v-model="taskName" placeholder="Enter task name" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500" required>
+              <label for="taskTitle" class="text-sm font-medium">Title</label>
+              <input type="text" id="taskTitle" v-model="taskTitle" placeholder="Enter task title" class="border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-500" required>
             </div>
             <div class="flex justify-end">
               <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded">
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div>
-      <Todolist :todos="tasks" @delete-todo="deleteTask" @update-task="updateTask"/>
+        <Todolist :todos="tasks" @delete-todo="deleteTask" @update-task="updateTask"/>
       </div>
     </main>
   </div>
@@ -45,8 +45,8 @@ export default {
   data() {
     return {
       showModal: false,
-      taskName: '',
-      tasks: [] 
+      taskTitle: '',
+      tasks: [],
     };
   },
   methods: {
@@ -55,32 +55,37 @@ export default {
     },
     closeModal() {
       this.showModal = false;
-      this.taskName = '';
+      this.taskTitle = '';
     },
+ 
+
+
   addTask() {
     const todo = {
-      title: this.taskName,
+      title: this.taskTitle,
       completed: false 
     };
     this.$store.dispatch('addTodo', todo)
       .then((data) => {
         this.tasks.push(data);
-        this.taskName = '';
+        this.taskTitle = '';
         this.closeModal();
       })
       .catch(error => {
         console.error('Error adding todo:', error);
       });
   },
-    deleteTask(todoId) {
-      this.tasks = this.tasks.filter(todo => todo.id !== todoId);
-    },
+
     updateTask(updatedTask){
       const index = this.tasks.findIndex(task => task.id === updatedTask.id);
       if(index !== -1){
         this.tasks[index] = { ...updatedTask };
       }
-    }
+    },
+
+    deleteTask(todoId) {
+      this.tasks = this.tasks.filter(todo => todo.id !== todoId);
+    },
   }
 };
 </script>
